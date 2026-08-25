@@ -1,8 +1,11 @@
 import logging
+from pathlib import Path
 
 import boto3
 from botocore.exceptions import ClientError
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 from app.config import get_settings
 from app.dependencies import get_s3_client
@@ -18,6 +21,13 @@ settings = get_settings()
 
 def create_app() -> FastAPI:
     app = FastAPI(title="DocuMind", version="1.0.0", description="Production-grade RAG API")
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     @app.on_event("startup")
     async def startup():
@@ -46,6 +56,10 @@ def create_app() -> FastAPI:
     @app.get("/health")
     async def health():
         return {"status": "ok"}
+
+    @app.get("/")
+    async def demo():
+        return FileResponse(Path(__file__).parent.parent / "demo.html")
 
     return app
 
