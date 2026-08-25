@@ -1,6 +1,14 @@
 # DocuMind
 
-Production-grade RAG (Retrieval-Augmented Generation) API for document Q&A.
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/pgvector-336791?logo=postgresql&logoColor=white)
+![AWS Lambda](https://img.shields.io/badge/AWS-Lambda-FF9900?logo=awslambda&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?logo=terraform&logoColor=white)
+
+Upload a PDF, ask questions about it, get grounded answers with citations back to the source chunks. A RAG API built the way a production service actually needs to be: deduplicated ingestion, atomic outbox-pattern event delivery, HNSW vector search, and a serverless deployment path — not a notebook wrapped in a `/query` endpoint.
+
+Run `docker-compose up` and `uvicorn app.main:app`, then open `http://127.0.0.1:8000` for a live demo UI to upload a PDF and ask questions in the browser.
 
 ## Architecture
 
@@ -83,7 +91,7 @@ cp .env.example .env
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-API docs available at **http://127.0.0.1:8000/docs**
+API docs available at **http://127.0.0.1:8000/docs**, and a browser demo UI at **http://127.0.0.1:8000/**
 
 ## API Endpoints
 
